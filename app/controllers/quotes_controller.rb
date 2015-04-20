@@ -2,8 +2,8 @@ class QuotesController < ApplicationController
   respond_to :json
 
   def show
-    # random_index = ...
-    quote = Quote.find(1)
+    id = Random.rand(1..Quote.count)
+    quote = Quote.find(id)
     json = {body: quote.content}
     render json
   end
