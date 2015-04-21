@@ -1,0 +1,1 @@
+json.quote @quote.content
