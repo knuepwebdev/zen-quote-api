@@ -8,13 +8,16 @@ module Api
         quote = quotes[id - 1]
         json = { body: quote.content }
         response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Last-Modified'] = (Time.now - 1.second).httpdate
         render json
       end
 
       private
 
       def quotes
-        Rails.application.config.quotes.to_a
+        config = Rails.application.config
+        config.quotes = Quote.all.to_a if config.quotes.empty?
+        config.quotes
       end
     end
   end
