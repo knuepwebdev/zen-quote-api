@@ -2,9 +2,12 @@ class QuotesController < ApplicationController
   respond_to :json
 
   def show
-    id = Random.rand(1..Quote.count)
+    count = Quote.count
+    id = Random.rand(1..count)
     quote = Quote.find(id)
-    json = {body: quote.content}
+    json = { body: quote.content }
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    puts response
     render json
   end
 end
